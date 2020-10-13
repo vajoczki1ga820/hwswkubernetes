@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fake-nfs-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual 
+  capacity:
+    storage: 200Mi
+  accessModes:
+    - ReadWriteOnce 
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/tmp/nfs/data"
+
+

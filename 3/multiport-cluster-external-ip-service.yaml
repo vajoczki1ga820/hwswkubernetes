@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    tier: frontend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 80
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 8081
+  clusterIP: 10.96.12.31
+  externalIPs: [80.11.12.10]

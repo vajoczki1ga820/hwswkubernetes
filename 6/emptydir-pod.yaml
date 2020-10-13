@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir
+spec:
+  initContainers:
+  - name: init-myservice
+    image: busybox:1.28
+    command: ["/bin/sh", "-c", "date > /init-cache/initial-date"]
+    volumeMounts:
+    - mountPath: /init-cache # mountPath can differ between containers
+      name: cache-volume
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ["/bin/sh", "-c", "cat /cache/initial-date && sleep 3600"]
+    volumeMounts:
+    - mountPath: /cache # mountPath can differ between containers
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}

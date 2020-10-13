@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: anti-affinity-app
+  name: anti-affinity-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anti-affinity-app
+  template:
+    metadata:
+      labels:
+        app: anti-affinity-app
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      affinity:
+        podAntiAffinity: # spread out nginx Pods so they can run one per node
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - anti-affinity-app
+            topologyKey: kubernetes.io/hostname # it is a node label

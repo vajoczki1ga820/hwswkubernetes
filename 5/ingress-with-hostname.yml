@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webserver-ingress  
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: hwsw-k8s.leannet.eu
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webserver-service
+            port:
+              number: 80

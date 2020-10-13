@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: quota-filler
+  name: quota-filler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quota-filler
+  template:
+    metadata:
+      labels:
+        app: quota-filler
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          limits:
+            cpu: 0.4
+            memory: 100Mi
+          requests:
+            cpu: 0.4
+            memory: 50Mi

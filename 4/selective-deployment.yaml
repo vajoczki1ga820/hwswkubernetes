@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: selective-app
+  name: selective-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selective-app
+  template:
+    metadata:
+      labels:
+        app: selective-app
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      nodeSelector:
+        diskType: ssd

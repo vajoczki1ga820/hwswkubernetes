@@ -1,0 +1,9 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: external-ip
+subsets:
+- addresses:
+  - ip: 8.8.8.8
+  ports:
+  - port: 80

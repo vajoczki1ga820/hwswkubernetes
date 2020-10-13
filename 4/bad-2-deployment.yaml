@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: busy
+  name: busy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busy
+  template:
+    metadata:
+      labels:
+        app: busy
+    spec:
+      containers:
+      - name: busy
+        image: busybox:1.28
+        command: ['sh', '-c', 'echho The app is running! && sleep 3600'] # bad command

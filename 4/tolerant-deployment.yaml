@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tolerant-app
+  name: tolerant-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tolerant-app
+  template:
+    metadata:
+      labels:
+        app: tolerant-app
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      tolerations:
+      - key: leavemealone
+        operator: Equal
+        value: please
+        effect: NoSchedule

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-pod-example 
+spec:
+  containers:
+    - image: nginx
+      name: nginx 
+      volumeMounts:
+      - mountPath: /tmp/data 
+        name: hostpath-nfs-volume
+  volumes:
+    - name: hostpath-nfs-volume
+      persistentVolumeClaim:
+        claimName: fake-nfs-pvc

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: blue-green-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - blue.hwsw.leannet.hu
+    - green.hwsw.leannet.hu
+    secretName: blue-green-tls
+  rules:
+  - host: blue.hwsw.leannet.hu
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: blue-service
+          servicePort: 80
+  - host: green.hwsw.leannet.hu
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: green-service
+          servicePort: 80
